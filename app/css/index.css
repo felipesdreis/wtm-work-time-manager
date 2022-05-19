@@ -1,0 +1,20 @@
+:root {
+    --cor-back: #e6e6e6;
+    --cor-texto:
+}
+
+#tempo {
+    font-size: 11vh;
+}
+
+body {
+    background-color: var(--cor-back);
+}
+
+nav {
+    background-color: #350071;
+}
+
+.menu-item{
+    color: #fff;
+}
