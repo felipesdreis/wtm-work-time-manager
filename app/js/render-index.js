@@ -1,12 +1,16 @@
 const dataService = require('../../services/data')
+const calculoTempo = require('../../services/tempoCalculo')
 const { ipcRenderer } = require('electron')
-const timer = require('../../services/timer')
-const dateFile = new Date().toLocaleDateString().replace(/\//g, '')
+const { Timer } = require("easytimer.js");
+const $ = require('jquery')
+// const dateFile = '01022022'
+const dateFile = new Date().toLocaleDateString()
 
 let timerRodando = false
+//[secondTenths, seconds, minutes, hours, days]
+let tempoRecuperado = [0, 0, 0, 0, 0]
+var timerInstance = new Timer();
 
-
-let closeButton = document.querySelector("#close-button")
 
 var tempo = new Vue({
     el: '#tempo',
@@ -31,6 +35,19 @@ var inputSave = new Vue({
     }
 })
 
+var totalTempo = new Vue({
+    el: '#totalTempo',
+    data: {
+        //seen: false,
+        value: ""
+    }
+})
+
+timerInstance.addEventListener('secondsUpdated', () => {
+    const obj = timerInstance.getTimeValues()
+    tempo.cronometro = obj.toString()
+})
+
 function deleteAtividade(id) {
     console.log(id);
     tableHoras.horas = tableHoras.horas.filter(atividades => {
@@ -41,12 +58,34 @@ function deleteAtividade(id) {
         item.id = index + 1
         return item
     })
+
+    somatempos()
+    dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
+    
 }
 
 function save() {
     inputSave.seen = true
     timerRodando = false
-    timer.parar()
+    timerInstance.pause()
+    setTimeout(() => {
+        $("#input-description").focus();
+    }, 200);
+
+}
+
+function salvarHoras() {
+    addAtividade()
+    inputSave.value = ""
+    inputSave.seen = false
+    tempo.cronometro = "00:00:00"
+    tempoRecuperado = [0, 0, 0, 0, 0]
+    timerInstance.reset()
+    timerInstance.stop()
+    somatempos()
+    dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
+    localStorage.setItem('tableHoras', JSON.stringify(tableHoras.horas))
+   
 }
 
 function addAtividade() {
@@ -62,12 +101,25 @@ function addAtividade() {
 }
 
 window.onload = () => {
-    //TODO: carregar as atividades do dia
+        
+    let diaHoras = dataService.pegaDadosDia(dateFile)
+    console.log("FSDR ~ tempHoras", diaHoras)
+    if (diaHoras.table != undefined) tableHoras.horas = diaHoras.table
+    $("#nav-placeholder").load("./nav.html");
+
+    //Carrega ultimo tempo no cronometro antes de fechar
+    tempo.cronometro = (localStorage.getItem("lastTimer") == '') ? '00:00:00' : localStorage.getItem("lastTimer")
+    formataTempoAnterior()
+    somatempos()
 }
 
-closeButton.addEventListener('click', () => {
-    ipcRenderer.send('app-quit')
-})
+function formataTempoAnterior() {
+
+    let tempoAntigo = (localStorage.getItem("lastTimer") == '') ? '00:00:00' : localStorage.getItem("lastTimer")
+    tempoAntigo = tempoAntigo.split(':')
+    tempoRecuperado = [0, parseInt(tempoAntigo[2]), parseInt(tempoAntigo[1]), parseInt(tempoAntigo[0]), 0]
+
+}
 
 
 //botoes de controle
@@ -75,25 +127,39 @@ function inicia() {
 
     if (timerRodando == true) return
     timerRodando = true
-    timer.iniciar(tempo)
+    timerInstance.start({ startValues: tempoRecuperado })
 
 }
 
 function pausa() {
     timerRodando = false
-    timer.parar()
+    timerInstance.pause()
 }
 
-function salvarHoras() {
-    addAtividade()
-    inputSave.value = ""
-    inputSave.seen = false
-    tempo.cronometro = "00:00:00"
-    dataService.escreveArquivo(tableHoras.horas)
-}
+
 
 function reset() {
     timerRodando = false
-    timer.parar()
+    timerInstance.reset()
+    timerInstance.stop()
     tempo.cronometro = "00:00:00"
+    tempoRecuperado = [0, 0, 0, 0, 0]
 }
+
+
+window.onbeforeunload = () => {
+    //salva ultimo tempo no cronometro, antes de sair da pagina
+    localStorage.setItem("lastTimer", tempo.cronometro)
+    localStorage.setItem('tableHoras', JSON.stringify(tableHoras.horas))
+};
+
+function somatempos() {
+
+    let lastTime = '00:00:00'
+    tableHoras.horas.forEach(item => {
+        lastTime = calculoTempo.somartempos(lastTime, item.tempo)
+    })
+    totalTempo.value = lastTime
+
+}
+

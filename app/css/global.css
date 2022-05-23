@@ -3,9 +3,6 @@
     --cor-texto:
 }
 
-#tempo {
-    font-size: 11vh;
-}
 
 body {
     background-color: var(--cor-back);

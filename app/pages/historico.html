@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>historico</title>
+    <!-- bootstrap/vue -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/vue2.6.14.js"></script>
+</head>
+
+<body>
+    <!--Navigation bar-->
+    <div id="nav-placeholder"></div>
+
+    <section style="text-align: center;" class="container">
+        <h1>Horas Diarias</h1>
+    </section>
+
+    <section id="dias" v-for="dia in dias" style="text-align: center;" class="container">
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{dia.data}}</h5>
+                <p class="card-text">
+                    {{dia.total}}
+                </p>
+                <button @click="abrirDetalhes(dia)" class="btn btn-primary">Detalhes</button>
+                <button @click="deletar(dia.data)" class="btn btn-danger">Deletar</button>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="../js/render-historico.js"></script>
+</body>
+
+</html>

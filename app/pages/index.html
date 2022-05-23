@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WTM</title>
-    <!-- bootstrap -->
+    <!-- bootstrap/vue -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/vue2.6.14.js"></script>
@@ -13,33 +13,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" >
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">WTM</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <img src="../img/menu.png" alt="menu" height="32">
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <button type="button" class="btn btn-danger btn-sm position-absolute bottom-0 end-0" 
-                style="margin-bottom: 3vh; margin-right: 3vh; margin-top: 3vh;" id="close-button">X</button>
-                <ul class="navbar-nav">
-                    <li class="nav-item" >
-                        <a class="nav-link menu-item" href="#">Cronômetro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-item" href="#">Horas trabalhadas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-item" href="#">Configurações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-item">Sobre</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!--Navigation bar-->
+    <div id="nav-placeholder"></div>
 
     <section class="container">
         <div style="text-align: center;" class="container">
@@ -49,10 +24,12 @@
 
     <section style="text-align: center;" class="container">
         <div class="btn-group" role="group" aria-label="Basic example" id="crono-button-group">
-            <button type="button" class="btn btn-success" onclick="inicia()">Start</button>
-            <button type="button" class="btn btn-primary" onclick="pausa()">Stop</button>
-            <button type="button" class="btn btn-danger" onclick="reset()">Reset</button>
-            <button type="button" class="btn btn-info" onclick="save()">Save</button>
+            <button type="button" class="btn btn-primary" onclick="pausa()"><img src="../img/pause.png" alt="pause" height="32"></button>
+            <button type="button" class="btn btn-success" onclick="inicia()"><img src="../img/play.png" alt="play" height="32"></button>
+            <button type="button" class="btn btn-danger" onclick="reset()"><img src="../img/reset.png" alt="reset" height="32"></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example" id="crono-button-group">         
+            <button type="button" class="btn btn-info" onclick="save()"><img src="../img/save.png" alt="save" height="32"></button>
         </div>
     </section>
 
@@ -60,9 +37,15 @@
     <section style="text-align: center; margin-top: 3vh;" class="container" id="input-save" v-if="seen">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Descrição</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model="value">
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-sm" v-model="value" @keydown.13="salvarHoras()" id="input-description">
             <button type="button" class="btn btn-success" onclick="salvarHoras()">Logar Horas</button>
-          </div>
+            <button type="button" class="btn btn-danger" onclick="inputSave.seen = false">Cancelar</button>
+        </div>
+    </section>
+
+    <section style="text-align: center; margin-top: 3vh;" class="container">
+        <h3>Total de Horas: <span id="totalTempo" >{{value}}</span></h3>
     </section>
 
     <section style="text-align: center; margin-top: 3vh;" class="container">
