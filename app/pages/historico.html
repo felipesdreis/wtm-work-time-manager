@@ -19,16 +19,15 @@
         <h1>Horas Diarias</h1>
     </section>
 
-    <section id="dias" v-for="dia in dias" style="text-align: center;" class="container">
-
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{dia.data}}</h5>
+    <section id="dias"  style="text-align: center;" class="container">
+        <div class="card" style="width: 18rem; margin: 2vh; background-color: #998a8a; color: #e8e8e8;" v-for="item in dias" >
+            <div class="card-body" >
+                <h5 class="card-title">{{item.data}}</h5>
                 <p class="card-text">
-                    {{dia.total}}
+                    {{item.total}}
                 </p>
-                <button @click="abrirDetalhes(dia)" class="btn btn-primary">Detalhes</button>
-                <button @click="deletar(dia.data)" class="btn btn-danger">Deletar</button>
+                <button @click="abrirDetalhes(item)" class="btn btn-primary">Detalhes</button>
+                <button @click="deletar(item.data)" class="btn btn-danger">Deletar</button>
             </div>
         </div>
 

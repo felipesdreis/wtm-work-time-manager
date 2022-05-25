@@ -8,6 +8,8 @@ window.onload = () => {
 
     let dados = dataService.pegaTodosDados()
     dia.dias = dados
+    console.log("FSDR ~ dados", dados)
+    
 }
 
 

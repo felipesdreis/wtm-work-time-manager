@@ -43,6 +43,41 @@ var totalTempo = new Vue({
     }
 })
 
+var promptManual = new Vue({
+    el: '#prompt-manual',
+    data: {
+        seen: false,
+        atividade: '',
+        tempo: ''
+    },
+    methods: {
+        cancelar: () => {
+            promptManual.seen = false
+            promptManual.atividade = ''
+            promptManual.tempo = ''
+        },
+        salvar: () => {
+            let newID = tableHoras.horas.length + 1
+            tableHoras.horas.push(
+                {
+                    id: newID,
+                    atividade: promptManual.atividade,
+                    tempo: promptManual.tempo
+                }
+            )
+            tempoRecuperado = [0, 0, 0, 0, 0]
+            timerInstance.reset()
+            timerInstance.stop()
+            somatempos()
+            dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
+            localStorage.setItem('tableHoras', JSON.stringify(tableHoras.horas))
+            promptManual.seen = false
+            promptManual.atividade = ''
+            promptManual.tempo = ''
+        }
+    }
+})
+
 timerInstance.addEventListener('secondsUpdated', () => {
     const obj = timerInstance.getTimeValues()
     tempo.cronometro = obj.toString()
@@ -61,7 +96,7 @@ function deleteAtividade(id) {
 
     somatempos()
     dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
-    
+
 }
 
 function save() {
@@ -85,7 +120,7 @@ function salvarHoras() {
     somatempos()
     dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
     localStorage.setItem('tableHoras', JSON.stringify(tableHoras.horas))
-   
+
 }
 
 function addAtividade() {
@@ -101,7 +136,7 @@ function addAtividade() {
 }
 
 window.onload = () => {
-        
+
     let diaHoras = dataService.pegaDadosDia(dateFile)
     console.log("FSDR ~ tempHoras", diaHoras)
     if (diaHoras.table != undefined) tableHoras.horas = diaHoras.table
@@ -159,7 +194,7 @@ function somatempos() {
     tableHoras.horas.forEach(item => {
         lastTime = calculoTempo.somartempos(lastTime, item.tempo)
     })
-    totalTempo.value = lastTime
+    totalTempo.value = (lastTime == undefined) ? '00:00:00' : lastTime
 
 }
 

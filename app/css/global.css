@@ -5,6 +5,11 @@
 
 
 body {
-    background-color: var(--cor-back);
+    /* background-color: var(--cor-back); */
+    background-image: url( '../img/back.svg' );
+}
+table {
+    background-color: rgb(230, 230, 230,0.4);
+    border-radius: 1vh;
 }
 

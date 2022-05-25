@@ -6,6 +6,7 @@
     <title>Detalhes</title>
     <!-- bootstrap/vue -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/global.css">
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/vue2.6.14.js"></script>
 </head>
@@ -16,9 +17,12 @@
     <section style="text-align: center;" class="container">
         <h2 id="dia">{{value}}</h2>
 
-        <ul class="list-group" id="tempos" style="margin: 5vh;" >
-            <li class="list-group-item" v-for="item in table"> <b>{{item.atividade}}:</b> {{item.tempo}}</li>
+        <ul class="list-group" id="tempos" style="margin: 5vh; ">
+            <li class="list-group-item" v-for="item in table" style="background-color: #789681; color:#e6e6e6">
+                <b>{{item.atividade}}:</b> {{item.tempo}}
+            </li>
         </ul>
+
 
         <h4 id="total">Tempo Total: {{value}}</h4>
     </section>
