@@ -57,6 +57,12 @@ var promptManual = new Vue({
             promptManual.tempo = ''
         },
         salvar: () => {
+            promptManual.tempo = `${promptManual.tempo}:00`
+            let validateTempo = promptManual.tempo.split(':')
+            if (validateTempo.length <3){
+                alert('Tempo deve seguir o formato 00:00')
+                return
+            }
             let newID = tableHoras.horas.length + 1
             tableHoras.horas.push(
                 {

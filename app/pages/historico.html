@@ -19,20 +19,24 @@
         <h1>Horas Diarias</h1>
     </section>
 
-    <section id="dias"  style="text-align: center;" class="container">
-        <div class="card" style="width: 18rem; margin: 2vh; background-color: #998a8a; color: #e8e8e8;" v-for="item in dias" >
-            <div class="card-body" >
-                <h5 class="card-title">{{item.data}}</h5>
-                <p class="card-text">
-                    {{item.total}}
-                </p>
-                <button @click="abrirDetalhes(item)" class="btn btn-primary">Detalhes</button>
-                <button @click="deletar(item.data)" class="btn btn-danger">Deletar</button>
+    <div class="container">
+        <section id="dias" style="text-align: center;">
+            <div class="row " >
+                <div class="card"  style="width: calc(98vh /2); background-color: #998a8a; color: #e8e8e8; display:inline-block; margin: 1vh;"
+                    v-for="item in dias">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.data}}</h5>
+                        <p class="card-text">
+                            {{item.total}}
+                        </p>
+                        <button @click="abrirDetalhes(item)" class="btn btn-primary">Detalhes</button>
+                        <button @click="deletar(item.data)" class="btn btn-danger">Deletar</button>
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-    </section>
-
+        </section>
+    </div>
     <script src="../js/render-historico.js"></script>
 </body>
 

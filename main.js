@@ -1,5 +1,12 @@
 const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron')
 
+const prod = true
+let dev = false
+if (prod){
+    dev = false
+}else{
+    dev = true
+}
 
 /**
  * Criar tela principal
@@ -14,6 +21,7 @@ const mainWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
+            devTools: dev
         }
     })
     nativeTheme.themeSource = 'dark'
@@ -43,12 +51,13 @@ ipcMain.on('detalhesPage', (event, dados) => {
     const detailWindow = () => {
         const win = new BrowserWindow({
             width: 500,
-            height: 400,
+            height: 600,
             autoHideMenuBar: true,
             frame: true,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
+                devTools: dev
             }
         })
         nativeTheme.themeSource = 'dark'

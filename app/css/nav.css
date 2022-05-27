@@ -1,5 +1,6 @@
 nav {
-    background-color: #789681;
+    /* background-color: #789681; */
+    background-image: url( '../img/bg-nav.svg' );
 }
 
 

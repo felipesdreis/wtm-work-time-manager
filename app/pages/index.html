@@ -54,8 +54,8 @@
             <input type="text" class="form-control" id="AtividadeInput" placeholder="Descrição" v-model="atividade">
           </div>
           <div class="mb-3">
-            <label for="tempoInput" class="form-label">Tempo</label>
-            <input type="text" class="form-control" id="tempoInput" placeholder="00:00:00" v-model="tempo">
+            <label for="tempoInput" class="form-label">Tempo hh:mm</label>
+            <input type="time" min="00:00:00" max="24:00:00" class="form-control" id="tempoInput" placeholder="00:00:00" v-model="tempo">
           </div>
           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-success" @click="salvar">Salvar</button>
