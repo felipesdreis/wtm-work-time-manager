@@ -26,13 +26,18 @@
     <!-- botoes de opcoes -->
     <section style="text-align: center;" class="container">
         <div class="btn-group" role="group" aria-label="Basic example" id="crono-button-group">
-            <button type="button" class="btn btn-primary" onclick="pausa()"><img src="../img/pause.png" alt="pause" height="32"></button>
-            <button type="button" class="btn btn-success" onclick="inicia()"><img src="../img/play.png" alt="play" height="32"></button>
-            <button type="button" class="btn btn-danger" onclick="reset()"><img src="../img/reset.png" alt="reset" height="32"></button>
+            <button type="button" class="btn btn-primary" onclick="pausa()"><img src="../img/pause.png" alt="pause"
+                    height="32"></button>
+            <button type="button" class="btn btn-success" onclick="inicia()"><img src="../img/play.png" alt="play"
+                    height="32"></button>
+            <button type="button" class="btn btn-danger" onclick="reset()"><img src="../img/reset.png" alt="reset"
+                    height="32"></button>
         </div>
-        <div class="btn-group" role="group" aria-label="Basic example" id="crono-button-group">         
-            <button title="Salvar Horas" type="button" class="btn btn-info" onclick="save()"><img src="../img/save.png" alt="save" height="32"></button>
-            <button title="Adicionar horas manualmente" type="button" class="btn btn-info" onclick="promptManual.seen = true"><img src="../img/manual-add.png" alt="save" height="32"></button>
+        <div class="btn-group" role="group" aria-label="Basic example" id="crono-button-group">
+            <button title="Salvar Horas" type="button" class="btn btn-info" onclick="save()"><img src="../img/save.png"
+                    alt="save" height="32"></button>
+            <button title="Adicionar horas manualmente" type="button" class="btn btn-info"
+                onclick="promptManual.seen = true"><img src="../img/manual-add.png" alt="save" height="32"></button>
         </div>
     </section>
 
@@ -41,7 +46,8 @@
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Descrição</span>
             <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-sm" v-model="value" @keydown.13="salvarHoras()" id="input-description">
+                aria-describedby="inputGroup-sizing-sm" v-model="value" @keydown.13="salvarHoras()"
+                id="input-description">
             <button type="button" class="btn btn-success" onclick="salvarHoras()">Logar Horas</button>
             <button type="button" class="btn btn-danger" onclick="inputSave.seen = false">Cancelar</button>
         </div>
@@ -52,44 +58,47 @@
         <div class="mb-3">
             <label for="AtividadeInput" class="form-label">Atividade</label>
             <input type="text" class="form-control" id="AtividadeInput" placeholder="Descrição" v-model="atividade">
-          </div>
-          <div class="mb-3">
+        </div>
+        <div class="mb-3">
             <label for="tempoInput" class="form-label">Tempo hh:mm</label>
-            <input type="time" min="00:00:00" max="24:00:00" class="form-control" id="tempoInput" placeholder="00:00:00" v-model="tempo">
-          </div>
-          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <input type="time" min="00:00:00" max="24:00:00" class="form-control" id="tempoInput" placeholder="00:00:00"
+                v-model="tempo">
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-success" @click="salvar">Salvar</button>
             <button type="button" class="btn btn-danger" @click="cancelar">Cancelar</button>
-          </div>
+        </div>
     </section>
 
     <section style="text-align: center; margin-top: 3vh;" class="container">
-        <h3>Total de Horas: <span id="totalTempo" >{{value}}</span></h3>
+        <h3>Total de Horas: <span id="totalTempo">{{value}}</span></h3>
     </section>
 
     <section style="text-align: center; margin-top: 3vh;" class="container">
-        <table class="table" id="table-horas">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Atividade</th>
-                    <th scope="col">Tempo</th>
-                    <th scope="col">Opções</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="atividade in horas">
-                    <th scope="row">{{atividade.id}}</th>
-                    <td>{{atividade.atividade}}</td>
-                    <td>{{atividade.tempo}}</td>
-                    <td>
-                        <button type="button" class="btn btn-outline-danger" @click="deleteAtividade(atividade.id)">
-                            <img src="../img/trash.png" alt="excluir" height="24">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow:auto; height: 50vh;">
+            <table class="table" id="table-horas"> 
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Atividade</th>
+                        <th scope="col">Tempo</th>
+                        <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="atividade in horas">
+                        <th scope="row">{{atividade.id}}</th>
+                        <td>{{atividade.atividade}}</td>
+                        <td>{{atividade.tempo}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" @click="deleteAtividade(atividade.id)">
+                                <img src="../img/trash.png" alt="excluir" height="24">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
 

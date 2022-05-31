@@ -1,10 +1,11 @@
 const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron')
+const path = require('path')
 
 const prod = true
 let dev = false
-if (prod){
+if (prod) {
     dev = false
-}else{
+} else {
     dev = true
 }
 
@@ -27,6 +28,19 @@ const mainWindow = () => {
     nativeTheme.themeSource = 'dark'
 
     win.loadFile('./app/pages/index.html')
+
+    win.setThumbarButtons([
+        {
+            tooltip: 'play',
+            icon: path.join(__dirname, '/app/img/play.png'),
+            click() { console.log('button1 clicked') }
+        }, {
+            tooltip: 'pause',
+            icon: path.join(__dirname, '/app/img/pause.png'),
+            flags: ['enabled', 'dismissonclick'],
+            click() { console.log('button2 clicked.') }
+        }
+    ])
 }
 
 
@@ -35,6 +49,7 @@ const mainWindow = () => {
 app.whenReady().then(() => {
 
     mainWindow()
+
 })
 
 //quit app
@@ -47,7 +62,7 @@ ipcMain.on('app-quit', () => { app.quit() })
 
 
 ipcMain.on('detalhesPage', (event, dados) => {
-    
+
     const detailWindow = () => {
         const win = new BrowserWindow({
             width: 500,
@@ -61,8 +76,8 @@ ipcMain.on('detalhesPage', (event, dados) => {
             }
         })
         nativeTheme.themeSource = 'dark'
-    
-        win.loadFile('./app/pages/details.html', {query: {"data": JSON.stringify(dados)}})
+
+        win.loadFile('./app/pages/details.html', { query: { "data": JSON.stringify(dados) } })
     }
 
     detailWindow()

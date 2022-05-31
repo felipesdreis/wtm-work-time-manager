@@ -9,7 +9,7 @@ window.onload = () => {
     let dados = dataService.pegaTodosDados()
     dia.dias = dados
     console.log("FSDR ~ dados", dados)
-    
+
 }
 
 
@@ -26,7 +26,9 @@ function abrirDetalhes(dadosDia) {
     ipcRenderer.send('detalhesPage', dadosDia)
 }
 
-function deletar(dia){
-    dataService.deletarDia(dia)
-    location.reload()
+function deletar(dia) {
+    if (confirm('Deseja relamente deletar?')) {
+        dataService.deletarDia(dia)
+        location.reload()
+    }
 }
