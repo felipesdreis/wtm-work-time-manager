@@ -4,8 +4,7 @@ const $ = require('jquery')
 const dataService = require('../../services/data')
 
 window.onload = () => {
-    $("#nav-placeholder").load("./nav.html");
-
+    
     let dados = dataService.pegaTodosDados()
     dia.dias = dados
     console.log("FSDR ~ dados", dados)

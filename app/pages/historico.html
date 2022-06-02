@@ -7,36 +7,36 @@
     <!-- bootstrap/vue -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/historico.css">
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/vue2.6.14.js"></script>
 </head>
 
 <body>
-    <!--Navigation bar-->
-    <div id="nav-placeholder"></div>
 
     <section style="text-align: center;" class="container">
-        <h1>Horas Diarias</h1>
+        <h1>Horas Diárias</h1>
     </section>
 
-    <div class="container">
-        <section id="dias" style="text-align: center;">
-            <div class="row " >
-                <div class="card"  style="width: calc(98vh /2); background-color: #998a8a; color: #e8e8e8; display:inline-block; margin: 1vh;"
-                    v-for="item in dias">
-                    <div class="card-body">
-                        <h5 class="card-title">{{item.data}}</h5>
-                        <p class="card-text">
-                            {{item.total}}
-                        </p>
-                        <button @click="abrirDetalhes(item)" class="btn btn-primary">Detalhes</button>
+
+    <section id="dias" style="margin-left: auto;margin-right: auto; width: 90%;">
+        <div class="grid-container">
+            <div class="card " style="width: calc(80vw /3); background-color: #998a8a; color: #e8e8e8;margin: 1vw;"
+                v-for="item in dias">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.data}}</h5>
+                    <p class="card-text">
+                        {{item.total}}
+                    </p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button @click="abrirDetalhes(item)" class="btn btn-info">Detalhes</button>
                         <button @click="deletar(item.data)" class="btn btn-danger">Deletar</button>
                     </div>
                 </div>
-
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
     <script src="../js/render-historico.js"></script>
 </body>
 

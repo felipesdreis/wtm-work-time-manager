@@ -15,17 +15,27 @@
 
 
     <section style="text-align: center;" class="container">
-        <h2 id="dia">{{value}}</h2>
+        <h2 id="dia" style="margin-top:2px ;">{{value}}</h2>
+        <div style="overflow:auto; height: 80vh;">
+            <table id="tempos" class="table">
+                <thead>
+                    <th scope="col">Atividade</th>
+                    <th scope="col">Tempo</th>
+                </thead>
+                <tbody>
+                    <tr v-for="item in table">
+                        <td style="font-weight:500;">{{item.atividade}}</td>
+                        <td>{{item.tempo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <ul class="list-group" id="tempos" style="margin: 5vh; ">
-            <li class="list-group-item" v-for="item in table" style="background-color: #789681; color:#e6e6e6">
-                <b>{{item.atividade}}:</b> {{item.tempo}}
-            </li>
-        </ul>
 
 
-        <h4 id="total">Tempo Total: {{value}}</h4>
+        <h4 id="total" style="background-color: #78968147 ; padding:5px; margin-top: 5px;">Tempo Total: {{value}}</h4>
     </section>
+    
 
     <script src="../js/render-details.js"></script>
 </body>

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">WTM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="menuButton">
             <img src="../img/menu.png" alt="menu" height="32">
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -15,7 +15,7 @@
                     <a class="nav-link menu-item" href="./index.html">Cronômetro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-item" href="./historico.html">Horas trabalhadas</a>
+                    <a class="nav-link menu-item" onclick="openHistorico()" >Horas trabalhadas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-item" href="./sobre.html">Sobre</a>
@@ -24,3 +24,5 @@
         </div>
     </div>
 </nav>
+
+<script src="../js/render-nav.js"></script>

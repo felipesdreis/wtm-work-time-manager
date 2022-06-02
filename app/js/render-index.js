@@ -71,9 +71,6 @@ var promptManual = new Vue({
                     tempo: promptManual.tempo
                 }
             )
-            tempoRecuperado = [0, 0, 0, 0, 0]
-            timerInstance.reset()
-            timerInstance.stop()
             somatempos()
             dataService.escreveArquivo(dateFile, tableHoras.horas, totalTempo.value)
             localStorage.setItem('tableHoras', JSON.stringify(tableHoras.horas))
@@ -159,6 +156,10 @@ function formataTempoAnterior() {
     let tempoAntigo = (localStorage.getItem("lastTimer") == '') ? '00:00:00' : localStorage.getItem("lastTimer")
     tempoAntigo = tempoAntigo.split(':')
     tempoRecuperado = [0, parseInt(tempoAntigo[2]), parseInt(tempoAntigo[1]), parseInt(tempoAntigo[0]), 0]
+    console.log("FSDR ~ formataTempoAnterior ~ tempoRecuperado", tempoRecuperado)
+    if (tempoRecuperado == null){
+        tempoRecuperado = [0,0,0,0,0]
+    }
 
 }
 
