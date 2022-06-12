@@ -1,4 +1,5 @@
 # wtm-work-time-manager
+<img src="logo wtm.png" height="100"/>
 
 App para gerenciamento de tempo de trabalho
 
@@ -33,3 +34,5 @@ Link para download
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="60" /> 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" height="60" />
+
+
