@@ -1,4 +1,4 @@
-const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron')
+const { app, BrowserWindow, nativeTheme, ipcMain, Menu, screen } = require('electron')
 const path = require('path')
 
 const prod = true
@@ -9,6 +9,8 @@ if (prod) {
     dev = true
 }
 nativeTheme.themeSource = 'dark'
+
+let dimension
 
 let mainWin
 /**
@@ -30,28 +32,16 @@ const mainWindow = () => {
 
     mainWin.loadFile('./app/pages/index.html')
 
-    mainWin.setThumbarButtons([{
-        tooltip: 'play',
-        icon: path.join(__dirname, '/app/img/play.png'),
-        click() {
-            console.log('button1 clicked')
-        }
-    }, {
-        tooltip: 'pause',
-        icon: path.join(__dirname, '/app/img/pause.png'),
-        flags: ['enabled', 'dismissonclick'],
-        click() {
-            console.log('button2 clicked.')
-        }
-    }])
 }
-
-
 
 //init app
 app.whenReady().then(() => {
 
     mainWindow()
+
+    let mainScreen = screen.getPrimaryDisplay();
+    dimension = mainScreen.size;
+
 
 })
 
@@ -75,10 +65,11 @@ ipcMain.on('detalhesPage', (event, dados) => {
     const detailWindow = () => {
         const detailWin = new BrowserWindow({
             width: 500,
-            height: 600,
+            height: dimension.height - 15,
             autoHideMenuBar: true,
             frame: true,
             modal: true,
+            parent: mainWin,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
@@ -86,11 +77,7 @@ ipcMain.on('detalhesPage', (event, dados) => {
             }
         })
 
-        detailWin.loadFile('./app/pages/details.html', {
-            query: {
-                "data": JSON.stringify(dados)
-            }
-        })
+        detailWin.loadFile('./app/pages/details.html', { query: { "data": JSON.stringify(dados) } })
     }
 
     detailWindow()
@@ -100,7 +87,7 @@ ipcMain.on('detalhesPage', (event, dados) => {
 ipcMain.on('historicoPage', (event) => {
 
     /**
-     * Pagina com oa dias passados
+     * Pagina com os dias passados
      *
      */
     const historyWindow = () => {

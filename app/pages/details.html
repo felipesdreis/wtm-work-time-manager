@@ -19,11 +19,13 @@
         <div style="overflow:auto; height: 80vh;">
             <table id="tempos" class="table">
                 <thead>
+                    <th scope="col">🆗</th>
                     <th scope="col">Atividade</th>
                     <th scope="col">Tempo</th>
                 </thead>
                 <tbody>
                     <tr v-for="item in table">
+                        <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
                         <td style="font-weight:500;">{{item.atividade}}</td>
                         <td>{{item.tempo}}</td>
                     </tr>
@@ -35,7 +37,7 @@
 
         <h4 id="total" style="background-color: #78968147 ; padding:5px; margin-top: 5px;">Tempo Total: {{value}}</h4>
     </section>
-    
+
 
     <script src="../js/render-details.js"></script>
 </body>
