@@ -1,13 +1,13 @@
 const { app, BrowserWindow, nativeTheme, ipcMain, Menu, screen } = require('electron')
 const path = require('path')
 
+// Alterar Ambiente
 const prod = true
-let dev = false
-if (prod) {
-    dev = false
-} else {
-    dev = true
-}
+
+// ativacao devTools
+let dev = !prod
+console.log("FSDR ~ dev", dev)
+
 nativeTheme.themeSource = 'dark'
 
 let dimension
@@ -91,7 +91,7 @@ ipcMain.on('historicoPage', (event) => {
      *
      */
     const historyWindow = () => {
-        const hisotryWin = new BrowserWindow({
+        const historyWin = new BrowserWindow({
             width: 801,
             height: 600,
             autoHideMenuBar: true,
@@ -105,9 +105,14 @@ ipcMain.on('historicoPage', (event) => {
             }
         })
 
-        hisotryWin.loadFile('./app/pages/historico.html')
+        historyWin.loadFile('./app/pages/historico.html')
     }
 
     historyWindow()
 
+})
+
+ipcMain.on('deleta-dia', (event, dia) => {
+    console.log("FSDR ~ ipcMain.on ~ dia", dia)
+    mainWin.send('indexdeletadia', dia)
 })

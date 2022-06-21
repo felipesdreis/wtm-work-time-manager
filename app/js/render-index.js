@@ -1,6 +1,6 @@
 const dataService = require('../../services/data')
 const calculoTempo = require('../../services/tempoCalculo')
-const { ipcRenderer } = require('electron')
+const { ipcRenderer  } = require('electron')
 const { Timer } = require("easytimer.js");
 const $ = require('jquery')
 // const dateFile = '01022022'
@@ -59,7 +59,7 @@ var promptManual = new Vue({
         salvar: () => {
             promptManual.tempo = `${promptManual.tempo}:00`
             let validateTempo = promptManual.tempo.split(':')
-            if (validateTempo.length <3){
+            if (validateTempo.length < 3) {
                 alert('Tempo deve seguir o formato 00:00')
                 return
             }
@@ -157,8 +157,8 @@ function formataTempoAnterior() {
     tempoAntigo = tempoAntigo.split(':')
     tempoRecuperado = [0, parseInt(tempoAntigo[2]), parseInt(tempoAntigo[1]), parseInt(tempoAntigo[0]), 0]
     console.log("FSDR ~ formataTempoAnterior ~ tempoRecuperado", tempoRecuperado)
-    if (tempoRecuperado == null){
-        tempoRecuperado = [0,0,0,0,0]
+    if (tempoRecuperado == null) {
+        tempoRecuperado = [0, 0, 0, 0, 0]
     }
 
 }
@@ -204,4 +204,13 @@ function somatempos() {
     totalTempo.value = (lastTime == undefined) ? '00:00:00' : lastTime
 
 }
+
+//deletar dia, no contexto da index
+ipcRenderer.on('indexdeletadia', (event, dia) => {
+    dataService.deletarDia(dia)
+    console.log('dia deletado == ' + dia);
+})
+
+
+
 

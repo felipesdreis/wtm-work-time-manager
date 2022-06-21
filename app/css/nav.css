@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'pacifico';
+    src: url('../fonts/Pacifico/Pacifico-Regular.ttf');
+}
+
+@font-face {
+    font-family: racing;
+    src: url('../fonts/Racing_Sans_One/RacingSansOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: cantana;
+    src: url('../fonts/Cantata_One/CantataOne-Regular.ttf');
+}
+
 nav {
     /* background-color: #789681; */
     background-image: url( '../img/bg-nav.svg' );
@@ -6,4 +21,14 @@ nav {
 
 .menu-item{
     color: white;
+}
+
+#nav-title{
+    font-family: racing;
+    font-size: 1.4em;
+}
+
+li{
+    font-family: cantana;
+    font-size: 1.2em;
 }

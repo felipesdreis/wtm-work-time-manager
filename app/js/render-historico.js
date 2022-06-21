@@ -3,8 +3,10 @@ const { ipcRenderer } = require('electron')
 const $ = require('jquery')
 const dataService = require('../../services/data')
 
+let dadosDelete = false
+
 window.onload = () => {
-    
+
     let dados = dataService.pegaTodosDados()
     dia.dias = dados
     console.log("FSDR ~ dados", dados)
@@ -26,8 +28,11 @@ function abrirDetalhes(dadosDia) {
 }
 
 function deletar(dia) {
-    if (confirm('Deseja relamente deletar?')) {
+    if (confirm('Deseja realmente deletar?')) {
         dataService.deletarDia(dia)
-        location.reload()
+        ipcRenderer.send('deleta-dia', dia)
+        setTimeout(() => {
+            location.reload()
+        }, 500);
     }
 }

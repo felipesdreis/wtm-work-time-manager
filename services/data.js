@@ -33,5 +33,8 @@ module.exports = {
     deletarDia(dia){
         let formatDiaKey = dia.replace(/\//g, '')
         db.delete(`/${formatDiaKey}`);
+        db.save();
+        db.reload();
+        return 'ok'
     }
 }
