@@ -129,3 +129,4 @@ dist
 # build directory
 WTM-win32-x64/
 build/
+Output/
