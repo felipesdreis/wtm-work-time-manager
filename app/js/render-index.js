@@ -207,8 +207,14 @@ function somatempos() {
 
 //deletar dia, no contexto da index
 ipcRenderer.on('indexdeletadia', (event, dia) => {
-    dataService.deletarDia(dia)
-    console.log('dia deletado == ' + dia);
+    if(dia == 'todos'){
+        dataService.deletarTodos()
+    }
+    else{
+        dataService.deletarDia(dia)
+        console.log('dia deletado == ' + dia);
+    }
+    
 })
 
 

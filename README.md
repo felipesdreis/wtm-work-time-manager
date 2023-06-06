@@ -34,3 +34,9 @@ Link para download
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="60" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" height="60" />
 
 
+### compilar
+```bash
+electron-packager ./ WTM --platform=win32  --icon=icon/icon --overwrite
+```
+### instalação
+AppData\Local\Programs\WTM - work time manager

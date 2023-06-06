@@ -36,5 +36,11 @@ module.exports = {
         db.save();
         db.reload();
         return 'ok'
+    },
+    deletarTodos(){
+        db.delete('/');
+        db.save();
+        db.reload();
+        return 'ok'
     }
 }

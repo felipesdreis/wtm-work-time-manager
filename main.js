@@ -2,7 +2,7 @@ const { app, BrowserWindow, nativeTheme, ipcMain, Menu, screen } = require('elec
 const path = require('path')
 
 // Alterar Ambiente
-const prod = true
+const prod = false
 
 // ativacao devTools
 let dev = !prod

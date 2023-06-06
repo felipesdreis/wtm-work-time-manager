@@ -32,4 +32,14 @@ var total = new Vue({
     }
 })
 
-
+function imprimir() {
+    let lista = tempos.table  
+    let stringCopy = "" 
+    lista.forEach(atividade => {
+        stringCopy = stringCopy + atividade.atividade +  ";\n"
+    });
+    navigator.clipboard.writeText(stringCopy)
+    setTimeout(() => {
+        alert("Copiado para a área de transferência")
+    }, 500);
+}

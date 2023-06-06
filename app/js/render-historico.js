@@ -36,3 +36,13 @@ function deletar(dia) {
         }, 500);
     }
 }
+
+function deletarTodos() {
+    if (confirm('Deseja realmente deletar?')) {
+        dataService.deletarTodos()
+        ipcRenderer.send('deleta-dia', 'todos')
+        setTimeout(() => {
+            location.reload()
+        }, 500);
+    }
+}

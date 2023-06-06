@@ -14,7 +14,7 @@
 <body>
 
 
-    <section style="text-align: center;" class="container">
+    <section style="text-align: center;" class="container" id="myDivToPrint">
         <h2 id="dia" style="margin-top:2px ;">{{value}}</h2>
         <div style="overflow:auto; height: 80vh;">
             <table id="tempos" class="table">
@@ -31,11 +31,15 @@
                     </tr>
                 </tbody>
             </table>
+
         </div>
 
 
 
         <h4 id="total" style="background-color: #78968147 ; padding:5px; margin-top: 5px;">Tempo Total: {{value}}</h4>
+    </section>
+    <section class="container"style="text-align: center;">
+        <button class="btn btn-outline-secondary" onclick="imprimir()">Copiar lista</button>
     </section>
 
 
